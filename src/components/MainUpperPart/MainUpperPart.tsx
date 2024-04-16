@@ -18,6 +18,7 @@ import {
   PageTitle,
   RightWraper,
   ImageWrap,
+  RightWraper1,
 } from "./styles"
 
 import type { MainUpperPartProps } from "./types"
@@ -47,7 +48,6 @@ function MainUpperPart({
   }
   return (
     <BcgContainer>
-
       <UpperNewsContainer>
         <NewsContainer>
           <NewsTitleContainer>{firstImgTitle}</NewsTitleContainer>
@@ -80,20 +80,25 @@ function MainUpperPart({
           <ImageComponent {...bcgImgDescr} />
           <TitleContainer>{mainTitle}</TitleContainer>
           <ButtonContainer $isGeneralPage={isGeneralPage}>
-            <DropdownMenu isGeneralPage={isGeneralPage} buttonProps={buttonProps} />
+            <DropdownMenu
+              isGeneralPage={isGeneralPage}
+              buttonProps={buttonProps}
+            />
           </ButtonContainer>
         </BackgroundImage>
-        <RightWraper>
-          <RightTitle>НАШИ РЕКОМЕНДАЦИИ</RightTitle>
-          <RightLink href="#">ГАСТРОНОМИЯ</RightLink>
-          <RightLink href="#">АВТОПРОМ</RightLink>
-          <RightLink href="#">КИНО</RightLink>
-          <RightLink href="#">КУЛЬТУРА</RightLink>
-          <RightLink href="#">ТЕХНИКА</RightLink>
-        </RightWraper>
+        {isGeneralPage && (
+          <RightWraper>
+            <RightTitle>НАШИ РАЗДЕЛЫ</RightTitle>
+            <RightLink href="#">ВРАЧИ</RightLink>
+            <RightLink href="#">ДЕТИ</RightLink>
+            <RightLink href="#">МАГАЗИНЫ</RightLink>
+            <RightLink href="#">КАФЕ И РЕСТОРАНЫ</RightLink>
+            <RightLink href="#">УСЛУГИ</RightLink>
+          </RightWraper>
+        )}
+        <RightWraper1> Адвокаты Берлина </RightWraper1>
       </BackgroundImageContainer>
-
-    </BcgContainer >
+    </BcgContainer>
   )
 }
 

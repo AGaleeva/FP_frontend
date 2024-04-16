@@ -5,6 +5,9 @@ import { colors } from 'styles/colors';
 interface ButtonContainerProps {
   $isGeneralPage?: boolean | undefined;
 }
+interface BackgroundImageProps {
+  $isGeneralPage?: boolean;
+}
 
 export const BcgContainer = styled.section`
   width: 100%;
@@ -162,8 +165,20 @@ export const RightWraper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: stretch;
+  flex-direction: column;    
+`;
+
+export const RightWraper1 = styled.div`
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   flex-direction: column;
-  width: 25%;
+  font-size: 30px;
+  font-weight: 700;
+  background-color: ${colors.baseGray50};
 `;
 
 export const NewsMainContainer = styled.div`

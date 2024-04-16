@@ -13,6 +13,9 @@ import FrontalPage_GenInfo from "pages/FrontalPage_GenInfo";
 import Berlin_Restaurants from "pages/Berlin/Berlin_Restaurants";
 import Berlin_Main from "pages/Berlin";
 import Berlin_Children from "pages/Berlin/Berlin_Children";
+import Berlin_Shops from "pages/Berlin/Berlin_Shops";
+import Berlin_Stomatologists from "pages/Berlin/Berlin_Stomatologists";
+import Berlin_LegalServices from "pages/Berlin/Berlin_LegalServices";
 
 
 function App() {
@@ -29,6 +32,12 @@ function App() {
             element={<Berlin_Restaurants />}
           />
           <Route path="/berlin/children" element={<Berlin_Children />} />
+          <Route path="/berlin/shops" element={<Berlin_Shops />} />
+          <Route path="/berlin/services" element={<Berlin_LegalServices />} />
+          <Route
+            path="/berlin/doctors"
+            element={<Berlin_Stomatologists />}
+          />
           <Route path="/munich" element={<Munich />} />
           <Route path="/frankfurt" element={<Frankfurt />} />
           <Route path="/dusseldorf" element={<Rheinland />} />

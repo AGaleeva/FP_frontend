@@ -40,8 +40,6 @@ function MainLowerPart() {
           endpoint = "/general_news/except/GENERAL_INFO"
         } else if (location.pathname === "/general-info") {
           endpoint = "/general_news/get_info_by/GENERAL_INFO"
-        } else if (location.pathname === "/other_path3") {
-          endpoint = "/other_endpoint3"
         }
 
         const response = await instance.get<NewsProps[]>(endpoint)
@@ -56,13 +54,18 @@ function MainLowerPart() {
   useEffect(() => {
     async function fetchInfoData() {
       try {
+
         let endpoint = "/berlin/restaurants_info"
         if (location.pathname === "/berlin/cafes-restaurants") {
           endpoint = "/berlin/restaurants_info"
         } else if (location.pathname === "/berlin/children") {
           endpoint = "/berlin/children_info"
-        } else if (location.pathname === "/other_path3") {
-          endpoint = "/other_endpoint3"
+        } else if (location.pathname === "/berlin/shops") {
+          endpoint = "/berlin/shops_info"
+        } else if (location.pathname === "/berlin/services") {
+          endpoint = "/berlin/legal_services_info"
+        } else if (location.pathname === "/berlin/doctors") {
+          endpoint = "/berlin/doctors_info/stomatologist"
         }
 
         const response = await instance.get<InfoProps[]>(endpoint)
@@ -96,6 +99,24 @@ function MainLowerPart() {
             <div>Loading...</div>
           ))}
         {location.pathname === "/berlin/children" &&
+          (infoData.length > 0 ? (
+            <InfoList infoList={infoData} />
+          ) : (
+            <div>Loading...</div>
+          ))}
+        {location.pathname === "/berlin/shops" &&
+          (infoData.length > 0 ? (
+            <InfoList infoList={infoData} />
+          ) : (
+            <div>Loading...</div>
+          ))}
+        {location.pathname === "/berlin/services" &&
+          (infoData.length > 0 ? (
+            <InfoList infoList={infoData} />
+          ) : (
+            <div>Loading...</div>
+          ))}
+        {location.pathname === "/berlin/doctors" &&
           (infoData.length > 0 ? (
             <InfoList infoList={infoData} />
           ) : (

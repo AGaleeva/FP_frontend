@@ -34,4 +34,6 @@ function FullNewsCard ({ open, onClose, news }: FullNewsCardProps) {
       </DialogActions>
     </Dialog>
   );
-};export default FullNewsCard;
+};
+
+export default FullNewsCard;
