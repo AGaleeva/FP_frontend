@@ -1,24 +1,9 @@
 import React, { useRef, useState } from "react";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Button from "@mui/material/Button";
-import {
-  BcgContainer,
-  RightTitle,
-  BackgroundImageContainer,
-  BackgroundImage,
-  MainTitle,
-  RightLink,
-  ButtonContainer,
-  PageTitle,
-  RightWraper,
-  BackgroundImage100,
-  ButtonRead,
-  MyImageComponent,
-  TitleContainerWrapper,
-} from "./styles";
+import { BcgContainer, BackgroundImageContainer, BackgroundImage, MainTitle, RightWraper, BackgroundImage100, ButtonRead, MyImageComponent, TitleContainerWrapper, PageTitle, RightTitle, RightLink, ButtonContainer } from "./styles";
+import CategoryMenu from "./CategoryMenu";
 import type { MainUpperPartProps } from "./types";
 import { useNavigate } from "react-router-dom";
+import { Menu, MenuItem } from "@mui/material";
 
 function MainMiddlePart({
   bcgImgDescr,
@@ -73,33 +58,12 @@ function MainMiddlePart({
               >
                 ВРАЧИ
               </RightLink>
-              <Menu
-                id="category-menu"
-                anchorEl={anchorRef.current}
-                open={isCategoryMenuOpen}
-                onClose={() => setCategoryMenuOpen(false)}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "right",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                anchorReference="anchorEl"
-                PaperProps={{
-                  style: {
-                    width: "23.8%",
-                    maxHeight: "none",
-                  },
-                }}
-              >
-                <MenuItem onClick={() => handleCategorySelection("physicians")}>Терапевты</MenuItem>
-                <MenuItem onClick={() => handleCategorySelection("pediatrists")}>Педиатры</MenuItem>
-                <MenuItem onClick={() => handleCategorySelection("stomatologists")}>Стоматологи</MenuItem>
-                <MenuItem onClick={() => handleCategorySelection("cardiologists")}>Кардиологи</MenuItem>
-                <MenuItem onClick={() => handleCategorySelection("orthopedists")}>Ортопеды</MenuItem>
-                <MenuItem onClick={() => handleCategorySelection("dermatologists")}>Дерматологи</MenuItem>              </Menu>
+              <CategoryMenu
+                anchorRef={anchorRef}
+                isCategoryMenuOpen={isCategoryMenuOpen}
+                setCategoryMenuOpen={setCategoryMenuOpen}
+                handleCategorySelection={handleCategorySelection}
+              />
               <Menu
                 id="city-menu"
                 anchorEl={anchorRef.current}
