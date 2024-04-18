@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
-
 import {
   BcgContainer,
   RightTitle,
@@ -18,7 +17,6 @@ import {
   MyImageComponent,
   TitleContainerWrapper,
 } from "./styles";
-
 import type { MainUpperPartProps } from "./types";
 import { useNavigate } from "react-router-dom";
 
@@ -52,7 +50,7 @@ function MainMiddlePart({
   const handleCitySelection = (city: string) => {
     // Редирект на другую страницу с учетом выбранной категории и города
     navigate(`/${city}/doctors/${selectedCategory}`);
-    console.log(`Redirect to doctors/${selectedCategory}/${city}`);
+    console.log(`Перенаправление на врачей/${selectedCategory}/${city}`);
   };
 
   return (
@@ -71,18 +69,10 @@ function MainMiddlePart({
                 aria-haspopup="true"
                 aria-controls="category-menu"
                 ref={anchorRef}
-                onClick={toggleCategoryMenu}>
-                ВРАЧИ
-              </RightLink>
-              {/* <Button
-                role="button"
-                aria-haspopup="true"
-                aria-controls="category-menu"
-                ref={anchorRef}
                 onClick={toggleCategoryMenu}
               >
                 ВРАЧИ
-              </Button> */}
+              </RightLink>
               <Menu
                 id="category-menu"
                 anchorEl={anchorRef.current}
@@ -90,20 +80,26 @@ function MainMiddlePart({
                 onClose={() => setCategoryMenuOpen(false)}
                 anchorOrigin={{
                   vertical: "bottom",
-                  horizontal: "left",
+                  horizontal: "right",
                 }}
                 transformOrigin={{
                   vertical: "top",
-                  horizontal: "left",
+                  horizontal: "right",
                 }}
-              >                <MenuItem onClick={() => handleCategorySelection("physicians")}>Терапевты</MenuItem>
-                <MenuItem onClick={() => handleCategorySelection("pediatrists")}>Педиатры</MenuItem>
-                <MenuItem onClick={() => handleCategorySelection("stomatologists")}>Стоматологи</MenuItem>
-                <MenuItem onClick={() => handleCategorySelection("cardiologists")}>Кардиологи</MenuItem>
-                <MenuItem onClick={() => handleCategorySelection("orthopedists")}>Ортопеды</MenuItem>
-                <MenuItem onClick={() => handleCategorySelection("dermatologists")}>Дерматологи</MenuItem>
-
-                {/* Добавьте остальные категории */}
+                anchorReference="anchorEl"
+                PaperProps={{
+                  style: {
+                    width: "24.35%",
+                    maxHeight: "none",
+                  },
+                }}
+              >
+                <MenuItem onClick={() => handleCategorySelection("терапевты")}>Терапевты</MenuItem>
+                <MenuItem onClick={() => handleCategorySelection("педиатры")}>Педиатры</MenuItem>
+                <MenuItem onClick={() => handleCategorySelection("стоматологи")}>Стоматологи</MenuItem>
+                <MenuItem onClick={() => handleCategorySelection("кардиологи")}>Кардиологи</MenuItem>
+                <MenuItem onClick={() => handleCategorySelection("ортопеды")}>Ортопеды</MenuItem>
+                <MenuItem onClick={() => handleCategorySelection("дерматологи")}>Дерматологи</MenuItem>
               </Menu>
               <Menu
                 id="city-menu"
@@ -112,19 +108,25 @@ function MainMiddlePart({
                 onClose={() => setCityMenuOpen(false)}
                 anchorOrigin={{
                   vertical: "bottom",
-                  horizontal: "left",
+                  horizontal: "right",
                 }}
                 transformOrigin={{
                   vertical: "top",
-                  horizontal: "left",
+                  horizontal: "right",
+                }}
+                anchorReference="anchorEl"
+                PaperProps={{
+                  style: {
+                    width: "24.35%",
+                    maxHeight: "none",
+                  },
                 }}
               >
-                <MenuItem onClick={() => handleCitySelection("berlin")}>Берлин</MenuItem>
-                <MenuItem onClick={() => handleCitySelection("munich")}>Мюнхен</MenuItem>
-                <MenuItem onClick={() => handleCitySelection("frankfurt")}>Франкфурт</MenuItem>
-                <MenuItem onClick={() => handleCitySelection("dusseldorf")}>Дюссельдорф</MenuItem>
-                <MenuItem onClick={() => handleCitySelection("hamburg")}>Гамбург</MenuItem>
-
+                <MenuItem onClick={() => handleCitySelection("берлин")}>Берлин</MenuItem>
+                <MenuItem onClick={() => handleCitySelection("мюнхен")}>Мюнхен</MenuItem>
+                <MenuItem onClick={() => handleCitySelection("франкфурт")}>Франкфурт</MenuItem>
+                <MenuItem onClick={() => handleCitySelection("дюссельдорф")}>Дюссельдорф</MenuItem>
+                <MenuItem onClick={() => handleCitySelection("гамбург")}>Гамбург</MenuItem>
               </Menu>
               <RightLink role="button">ДЕТИ</RightLink>
               <RightLink role="button">МАГАЗИНЫ</RightLink>
