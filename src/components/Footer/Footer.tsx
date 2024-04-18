@@ -28,13 +28,13 @@ function Footer() {
           </FooterContainerTwo>
 
           <FooterContainerThree>
-            <SocialIcons href="https://www.facebook.com" target="_blank">
+            <SocialIcons href="#">
               <FaFacebook />
             </SocialIcons>
-            <SocialIcons href="https://www.youtube.com" target="_blank">
+            <SocialIcons href="#">
               <FaYoutube />
             </SocialIcons>
-            <SocialIcons href="https://www.instagram.com" target="_blank">
+            <SocialIcons href="#">
               <FaInstagram />
             </SocialIcons>
           </FooterContainerThree>
