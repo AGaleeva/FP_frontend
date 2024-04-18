@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { BcgContainer, BackgroundImageContainer, BackgroundImage, MainTitle, RightWraper, BackgroundImage100, ButtonRead, MyImageComponent, TitleContainerWrapper, PageTitle, RightTitle, RightLink, ButtonContainer } from "./styles";
-import CategoryMenu from "./CategoryMenu";
+import DoctorsMenu from "./DoctorsMenu";
+import ServicesMenu from "./ServicesMenu";
 import type { MainUpperPartProps } from "./types";
 import { useNavigate } from "react-router-dom";
 import { Menu, MenuItem } from "@mui/material";
@@ -13,13 +14,19 @@ function MainMiddlePart({
 }: MainUpperPartProps) {
   const TitleContainer = isMainPage ? MainTitle : PageTitle;
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedService, setSelectedService] = useState<string | null>(null);
   const [isCategoryMenuOpen, setCategoryMenuOpen] = useState(false);
+  const [isServicesMenuOpen, setServicesMenuOpen] = useState(false);
   const [isCityMenuOpen, setCityMenuOpen] = useState(false);
   const navigate = useNavigate();
   const anchorRef = useRef<HTMLButtonElement | null>(null);
 
   const toggleCategoryMenu = () => {
     setCategoryMenuOpen(!isCategoryMenuOpen);
+  };
+
+  const toggleServicesMenu = () => {
+    setServicesMenuOpen(!isServicesMenuOpen);
   };
 
   const toggleCityMenu = () => {
@@ -29,11 +36,16 @@ function MainMiddlePart({
   const handleCategorySelection = (category: string) => {
     setSelectedCategory(category);
     setCityMenuOpen(true);
-    setCategoryMenuOpen(false); // Закрываем меню категорий
+    setCategoryMenuOpen(false);
+  };
+
+  const handleServiceSelection = (service: string) => {
+    setSelectedService(service);
+    setCityMenuOpen(true);
+    setServicesMenuOpen(false);
   };
 
   const handleCitySelection = (city: string) => {
-    // Редирект на другую страницу с учетом выбранной категории и города
     navigate(`/${city}/doctors/${selectedCategory}`);
     console.log(`Перенаправление на врачей/${selectedCategory}/${city}`);
   };
@@ -58,11 +70,26 @@ function MainMiddlePart({
               >
                 ВРАЧИ
               </RightLink>
-              <CategoryMenu
+              <DoctorsMenu
                 anchorRef={anchorRef}
                 isCategoryMenuOpen={isCategoryMenuOpen}
                 setCategoryMenuOpen={setCategoryMenuOpen}
                 handleCategorySelection={handleCategorySelection}
+              />
+              <RightLink
+                role="button"
+                aria-haspopup="true"
+                aria-controls="services-menu"
+                ref={anchorRef}
+                onClick={toggleServicesMenu}
+              >
+                УСЛУГИ
+              </RightLink>
+              <ServicesMenu
+                anchorRef={anchorRef}
+                isServicesMenuOpen={isServicesMenuOpen}
+                setServicesMenuOpen={setServicesMenuOpen}
+                handleServiceSelection={handleServiceSelection}
               />
               <Menu
                 id="city-menu"
@@ -114,6 +141,8 @@ function MainMiddlePart({
       </BackgroundImageContainer>
       {/* Элемент-якорь для меню категорий */}
       <div id="category-menu-anchor" style={{ display: "none" }} />
+      {/* Элемент-якорь для меню услуг */}
+      <div id="services-menu-anchor" style={{ display: "none" }} />
       {/* Элемент-якорь для меню городов */}
       <div id="city-menu-anchor" style={{ display: "none" }} />
     </BcgContainer>

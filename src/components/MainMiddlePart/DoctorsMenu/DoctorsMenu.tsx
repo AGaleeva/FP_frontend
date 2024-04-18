@@ -3,19 +3,19 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { RightLink } from "../styles";
 
-interface CategoryMenuProps {
+interface DoctorsMenuProps {
   anchorRef: React.RefObject<HTMLButtonElement | null>;
   isCategoryMenuOpen: boolean;
   setCategoryMenuOpen: React.Dispatch<React.SetStateAction<boolean>>; // Указываем тип явно
   handleCategorySelection: (category: string) => void;
 }
 
-function CategoryMenu({
+function DoctorsMenu({
   anchorRef,
   isCategoryMenuOpen,
   setCategoryMenuOpen,
   handleCategorySelection,
-}: CategoryMenuProps) {
+}: DoctorsMenuProps) {
   return (
     <Menu
       id="category-menu"
@@ -48,4 +48,4 @@ function CategoryMenu({
   );
 }
 
-export default CategoryMenu;
+export default DoctorsMenu;
