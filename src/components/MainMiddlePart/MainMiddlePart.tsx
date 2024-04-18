@@ -66,10 +66,15 @@ function MainMiddlePart({
             </BackgroundImage>
             <RightWraper>
               <RightTitle>НАШИ РАЗДЕЛЫ</RightTitle>
-              {/* <RightLink role="button" onClick={toggleCategoryMenu}>
+              <RightLink
+                role="button"
+                aria-haspopup="true"
+                aria-controls="category-menu"
+                ref={anchorRef}
+                onClick={toggleCategoryMenu}>
                 ВРАЧИ
-              </RightLink> */}
-              <Button
+              </RightLink>
+              {/* <Button
                 role="button"
                 aria-haspopup="true"
                 aria-controls="category-menu"
@@ -77,7 +82,7 @@ function MainMiddlePart({
                 onClick={toggleCategoryMenu}
               >
                 ВРАЧИ
-              </Button>
+              </Button> */}
               <Menu
                 id="category-menu"
                 anchorEl={anchorRef.current}
@@ -102,9 +107,17 @@ function MainMiddlePart({
               </Menu>
               <Menu
                 id="city-menu"
-                anchorEl={document.getElementById("city-menu-anchor")}
+                anchorEl={anchorRef.current}
                 open={isCityMenuOpen}
                 onClose={() => setCityMenuOpen(false)}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
               >
                 <MenuItem onClick={() => handleCitySelection("berlin")}>Берлин</MenuItem>
                 <MenuItem onClick={() => handleCitySelection("munich")}>Мюнхен</MenuItem>
