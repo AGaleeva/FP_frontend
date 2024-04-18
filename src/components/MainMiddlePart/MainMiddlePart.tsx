@@ -89,7 +89,7 @@ function MainMiddlePart({
                 anchorReference="anchorEl"
                 PaperProps={{
                   style: {
-                    width: "24.35%",
+                    width: "23.7%",
                     maxHeight: "none",
                   },
                 }}
@@ -117,7 +117,7 @@ function MainMiddlePart({
                 anchorReference="anchorEl"
                 PaperProps={{
                   style: {
-                    width: "24.35%",
+                    width: "23.7%",
                     maxHeight: "none",
                   },
                 }}
