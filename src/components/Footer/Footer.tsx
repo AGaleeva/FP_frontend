@@ -1,45 +1,53 @@
-
-import LogoComponent from "components/LogoComponent"
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebookF, faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import {
-  FooterContainer,
-  LogoAndContacts,
-  TermsAndConditions,
+  FooterMain,
+  FooterMainContainer,
+  FooterRow,
+  FooterContainerOne,
+  FooterContainerTwo,
+  FooterContainerThree,
+  ContactInfo,
+  TermsLinks,
   SocialIcons,
-  SocialIconLink
-} from "./styles";
+  Separator,
+} from "./styles"
+import { FaFacebook, FaYoutube, FaInstagram } from "react-icons/fa"
 
 function Footer() {
   return (
-    <FooterContainer>
-      <LogoAndContacts>
-        <LogoComponent src="/src/assets/GermanyMain2.png" alt="GermanMainLogo" />
-        <p>Contact Info от Мишы</p>
-      </LogoAndContacts>
-      <TermsAndConditions>
-        <a href="#">Terms of Use</a>
-        <a href="#">Privacy Policy</a>
-      </TermsAndConditions>
-      <SocialIcons>
-      <SocialIconLink href="https://www.facebook.com/">
-        <FontAwesomeIcon icon={faFacebookF} />
-      </SocialIconLink>
-      
-      {/* Иконка YouTube */}
-      <SocialIconLink href="https://www.youtube.com/">
-        <FontAwesomeIcon icon={faYoutube} />
-      </SocialIconLink>
+    <FooterMain>
+      <FooterMainContainer>
+        <FooterRow>
+          <FooterContainerOne>
+            <img src="/src/assets/GermanyMain2.png" alt="GermanMainLogo" />
+          </FooterContainerOne>
 
-      {/* Иконка Instagram */}
-      <SocialIconLink href="https://www.instagram.com/">
-        <FontAwesomeIcon icon={faInstagram} />
-      </SocialIconLink>
-      </SocialIcons>
-    </FooterContainer>
-  );
+          <FooterContainerTwo>
+            <TermsLinks href="/src/assets/TermsOfUse.html" target="_blank">
+              Условия использования
+            </TermsLinks>
+          </FooterContainerTwo>
+
+          <FooterContainerThree>
+            <SocialIcons href="https://www.facebook.com" target="_blank">
+              <FaFacebook />
+            </SocialIcons>
+            <SocialIcons href="https://www.youtube.com" target="_blank">
+              <FaYoutube />
+            </SocialIcons>
+            <SocialIcons href="https://www.instagram.com" target="_blank">
+              <FaInstagram />
+            </SocialIcons>
+          </FooterContainerThree>
+        </FooterRow>
+
+        <Separator />
+
+        <ContactInfo>
+          Германия, Берлин, Бранденбургские ворота, Центральный вход © Team 24
+        </ContactInfo>
+      </FooterMainContainer>
+    </FooterMain>
+  )
 }
 
-export default Footer;
-
+export default Footer
