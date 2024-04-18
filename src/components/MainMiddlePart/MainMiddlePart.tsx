@@ -89,18 +89,17 @@ function MainMiddlePart({
                 anchorReference="anchorEl"
                 PaperProps={{
                   style: {
-                    width: "23.7%",
+                    width: "23.8%",
                     maxHeight: "none",
                   },
                 }}
               >
-                <MenuItem onClick={() => handleCategorySelection("терапевты")}>Терапевты</MenuItem>
-                <MenuItem onClick={() => handleCategorySelection("педиатры")}>Педиатры</MenuItem>
-                <MenuItem onClick={() => handleCategorySelection("стоматологи")}>Стоматологи</MenuItem>
-                <MenuItem onClick={() => handleCategorySelection("кардиологи")}>Кардиологи</MenuItem>
-                <MenuItem onClick={() => handleCategorySelection("ортопеды")}>Ортопеды</MenuItem>
-                <MenuItem onClick={() => handleCategorySelection("дерматологи")}>Дерматологи</MenuItem>
-              </Menu>
+                <MenuItem onClick={() => handleCategorySelection("physicians")}>Терапевты</MenuItem>
+                <MenuItem onClick={() => handleCategorySelection("pediatrists")}>Педиатры</MenuItem>
+                <MenuItem onClick={() => handleCategorySelection("stomatologists")}>Стоматологи</MenuItem>
+                <MenuItem onClick={() => handleCategorySelection("cardiologists")}>Кардиологи</MenuItem>
+                <MenuItem onClick={() => handleCategorySelection("orthopedists")}>Ортопеды</MenuItem>
+                <MenuItem onClick={() => handleCategorySelection("dermatologists")}>Дерматологи</MenuItem>              </Menu>
               <Menu
                 id="city-menu"
                 anchorEl={anchorRef.current}
@@ -117,16 +116,16 @@ function MainMiddlePart({
                 anchorReference="anchorEl"
                 PaperProps={{
                   style: {
-                    width: "23.7%",
+                    width: "23.8%",
                     maxHeight: "none",
                   },
                 }}
               >
-                <MenuItem onClick={() => handleCitySelection("берлин")}>Берлин</MenuItem>
-                <MenuItem onClick={() => handleCitySelection("мюнхен")}>Мюнхен</MenuItem>
-                <MenuItem onClick={() => handleCitySelection("франкфурт")}>Франкфурт</MenuItem>
-                <MenuItem onClick={() => handleCitySelection("дюссельдорф")}>Дюссельдорф</MenuItem>
-                <MenuItem onClick={() => handleCitySelection("гамбург")}>Гамбург</MenuItem>
+                <MenuItem onClick={() => handleCitySelection("berlin")}>Берлин</MenuItem>
+                <MenuItem onClick={() => handleCitySelection("munich")}>Мюнхен</MenuItem>
+                <MenuItem onClick={() => handleCitySelection("frankfurt")}>Франкфурт</MenuItem>
+                <MenuItem onClick={() => handleCitySelection("dusseldorf")}>Дюссельдорф</MenuItem>
+                <MenuItem onClick={() => handleCitySelection("hamburg")}>Гамбург</MenuItem>
               </Menu>
               <RightLink role="button">ДЕТИ</RightLink>
               <RightLink role="button">МАГАЗИНЫ</RightLink>
