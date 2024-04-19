@@ -105,6 +105,11 @@ function MainMiddlePart({
                 setCityMenuOpen={setCityMenuOpen}
                 handleCitySelection={handleCitySelectionService}
               />
+              <RightLink role="button">ДЕТИ</RightLink>
+              <RightLink role="button">МАГАЗИНЫ</RightLink>
+              <RightLink role="button">КАФЕ И РЕСТОРАНЫ</RightLink>
+              <RightLink role="button">УСЛУГИ</RightLink>
+
             </RightWraper>
           </>
         )}
