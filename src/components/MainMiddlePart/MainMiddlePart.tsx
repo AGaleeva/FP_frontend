@@ -1,10 +1,10 @@
+// MainMiddlePart.tsx
 import React, { useRef, useState } from "react";
 import { BcgContainer, BackgroundImageContainer, BackgroundImage, MainTitle, RightWraper, BackgroundImage100, ButtonRead, MyImageComponent, TitleContainerWrapper, PageTitle, RightTitle, RightLink, ButtonContainer } from "./styles";
 import DoctorsMenu from "./DoctorsMenu";
 import ServicesMenu from "./ServicesMenu";
 import type { MainUpperPartProps } from "./types";
 import { useNavigate } from "react-router-dom";
-import { Menu, MenuItem } from "@mui/material";
 
 function MainMiddlePart({
   bcgImgDescr,
@@ -13,13 +13,14 @@ function MainMiddlePart({
   isGeneralPage,
 }: MainUpperPartProps) {
   const TitleContainer = isMainPage ? MainTitle : PageTitle;
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedDoctor, setSelectedDoctor] = useState<string | null>(null);
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [isCategoryMenuOpen, setCategoryMenuOpen] = useState(false);
   const [isServicesMenuOpen, setServicesMenuOpen] = useState(false);
   const [isCityMenuOpen, setCityMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const anchorRef = useRef<HTMLButtonElement | null>(null);
+  const doctorsMenuAnchorRef = useRef<HTMLButtonElement | null>(null); // Реф для меню врачей
+  const servicesMenuAnchorRef = useRef<HTMLButtonElement | null>(null); // Реф для меню услуг
 
   const toggleCategoryMenu = () => {
     setCategoryMenuOpen(!isCategoryMenuOpen);
@@ -33,8 +34,8 @@ function MainMiddlePart({
     setCityMenuOpen(!isCityMenuOpen);
   };
 
-  const handleCategorySelection = (category: string) => {
-    setSelectedCategory(category);
+  const handleDoctorSelection = (category: string) => {
+    setSelectedDoctor(category);
     setCityMenuOpen(true);
     setCategoryMenuOpen(false);
   };
@@ -46,8 +47,13 @@ function MainMiddlePart({
   };
 
   const handleCitySelection = (city: string) => {
-    navigate(`/${city}/doctors/${selectedCategory}`);
-    console.log(`Перенаправление на врачей/${selectedCategory}/${city}`);
+    navigate(`/${city}/doctors/${selectedDoctor}`);
+    console.log(`Перенаправление на врачей/${selectedDoctor}/${city}`);
+  };
+
+  const handleCitySelectionService = (city: string) => {
+    navigate(`/${city}/services/${selectedService}`);
+    console.log(`Перенаправление на услиги/${selectedService}/${city}`);
   };
 
   return (
@@ -65,63 +71,40 @@ function MainMiddlePart({
                 role="button"
                 aria-haspopup="true"
                 aria-controls="category-menu"
-                ref={anchorRef}
+                ref={doctorsMenuAnchorRef} // Используем реф для меню врачей
                 onClick={toggleCategoryMenu}
               >
                 ВРАЧИ
               </RightLink>
               <DoctorsMenu
-                anchorRef={anchorRef}
+                anchorRef={doctorsMenuAnchorRef}
                 isCategoryMenuOpen={isCategoryMenuOpen}
                 setCategoryMenuOpen={setCategoryMenuOpen}
-                handleCategorySelection={handleCategorySelection}
+                handleCategorySelection={handleDoctorSelection}
+                cityMenuAnchorRef={doctorsMenuAnchorRef} // Передаем анкор для Menu городов
+                isCityMenuOpen={isCityMenuOpen}
+                setCityMenuOpen={setCityMenuOpen}
+                handleCitySelection={handleCitySelection}
               />
               <RightLink
                 role="button"
                 aria-haspopup="true"
                 aria-controls="services-menu"
-                ref={anchorRef}
+                ref={servicesMenuAnchorRef} // Используем реф для меню услуг
                 onClick={toggleServicesMenu}
               >
                 УСЛУГИ
               </RightLink>
               <ServicesMenu
-                anchorRef={anchorRef}
+                anchorRef={servicesMenuAnchorRef}
                 isServicesMenuOpen={isServicesMenuOpen}
                 setServicesMenuOpen={setServicesMenuOpen}
                 handleServiceSelection={handleServiceSelection}
+                cityMenuAnchorRef={servicesMenuAnchorRef} // Передаем анкор для Menu городов
+                isCityMenuOpen={isCityMenuOpen}
+                setCityMenuOpen={setCityMenuOpen}
+                handleCitySelection={handleCitySelectionService}
               />
-              <Menu
-                id="city-menu"
-                anchorEl={anchorRef.current}
-                open={isCityMenuOpen}
-                onClose={() => setCityMenuOpen(false)}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "right",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                anchorReference="anchorEl"
-                PaperProps={{
-                  style: {
-                    width: "23.8%",
-                    maxHeight: "none",
-                  },
-                }}
-              >
-                <MenuItem onClick={() => handleCitySelection("berlin")}>Берлин</MenuItem>
-                <MenuItem onClick={() => handleCitySelection("munich")}>Мюнхен</MenuItem>
-                <MenuItem onClick={() => handleCitySelection("frankfurt")}>Франкфурт</MenuItem>
-                <MenuItem onClick={() => handleCitySelection("dusseldorf")}>Дюссельдорф</MenuItem>
-                <MenuItem onClick={() => handleCitySelection("hamburg")}>Гамбург</MenuItem>
-              </Menu>
-              <RightLink role="button">ДЕТИ</RightLink>
-              <RightLink role="button">МАГАЗИНЫ</RightLink>
-              <RightLink role="button">КАФЕ И РЕСТОРАНЫ</RightLink>
-              <RightLink role="button">УСЛУГИ</RightLink>
             </RightWraper>
           </>
         )}
@@ -139,12 +122,6 @@ function MainMiddlePart({
           </BackgroundImage100>
         )}
       </BackgroundImageContainer>
-      {/* Элемент-якорь для меню категорий */}
-      <div id="category-menu-anchor" style={{ display: "none" }} />
-      {/* Элемент-якорь для меню услуг */}
-      <div id="services-menu-anchor" style={{ display: "none" }} />
-      {/* Элемент-якорь для меню городов */}
-      <div id="city-menu-anchor" style={{ display: "none" }} />
     </BcgContainer>
   );
 }
