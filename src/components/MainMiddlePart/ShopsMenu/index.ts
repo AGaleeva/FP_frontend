@@ -1,3 +1,3 @@
-import ChildrenMenu from "./ShopsMenu";
+import ShopsMenu from "./ShopsMenu";
 
-export default ChildrenMenu;
+export default ShopsMenu;

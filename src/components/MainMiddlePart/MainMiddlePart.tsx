@@ -4,7 +4,8 @@ import { BcgContainer, BackgroundImageContainer, BackgroundImage, MainTitle, Rig
 import DoctorsMenu from "./DoctorsMenu";
 import ServicesMenu from "./ServicesMenu";
 import ChildrenMenu from "./ChildrenMenu";
-import ShopsMenu from "./ShopsMenu"; // Импорт компонента для меню магазинов
+import ShopsMenu from "./ShopsMenu";
+import CafesMenu from "./CafesMenu"; // Импорт компонента для меню кафе
 import type { MainUpperPartProps } from "./types";
 import { useNavigate } from "react-router-dom";
 
@@ -22,12 +23,14 @@ function MainMiddlePart({
   const [isDoctorCityMenuOpen, setDoctorCityMenuOpen] = useState(false);
   const [isServiceCityMenuOpen, setServiceCityMenuOpen] = useState(false);
   const [isChildrenCityMenuOpen, setChildrenCityMenuOpen] = useState(false);
-  const [isShopsCityMenuOpen, setShopsCityMenuOpen] = useState(false); // Состояние для открытия меню городов для магазинов
+  const [isShopsCityMenuOpen, setShopsCityMenuOpen] = useState(false);
+  const [isCafesCityMenuOpen, setCafesCityMenuOpen] = useState(false); // Состояние для открытия меню городов для кафе
   const navigate = useNavigate();
   const doctorMenuAnchorRef = useRef<HTMLButtonElement | null>(null);
   const serviceMenuAnchorRef = useRef<HTMLButtonElement | null>(null);
   const childrenMenuAnchorRef = useRef<HTMLButtonElement | null>(null);
-  const shopsMenuAnchorRef = useRef<HTMLButtonElement | null>(null); // Реф для меню магазинов
+  const shopsMenuAnchorRef = useRef<HTMLButtonElement | null>(null);
+  const cafesMenuAnchorRef = useRef<HTMLButtonElement | null>(null); // Реф для меню кафе
 
   const toggleDoctorMenu = () => {
     setDoctorMenuOpen(!isDoctorMenuOpen);
@@ -50,7 +53,11 @@ function MainMiddlePart({
   };
 
   const toggleShopsCityMenu = () => {
-    setShopsCityMenuOpen(!isShopsCityMenuOpen); // Функция для открытия/закрытия меню городов для магазинов
+    setShopsCityMenuOpen(!isShopsCityMenuOpen);
+  };
+
+  const toggleCafesCityMenu = () => {
+    setCafesCityMenuOpen(!isCafesCityMenuOpen); // Функция для открытия/закрытия меню городов для кафе
   };
 
   const handleDoctorSelection = (doctor: string) => {
@@ -83,6 +90,11 @@ function MainMiddlePart({
   const handleShopsCitySelection = (city: string) => {
     navigate(`/${city}/shops`);
     console.log(`Перенаправление на магазины/${city}`);
+  };
+
+  const handleCafesCitySelection = (city: string) => {
+    navigate(`/${city}/cafes-restaurants`);
+    console.log(`Перенаправление на кафе/${city}`);
   };
 
   return (
@@ -164,7 +176,21 @@ function MainMiddlePart({
                 setMenuOpen={setShopsCityMenuOpen}
                 handleCitySelection={handleShopsCitySelection}
               />
-              <RightLink role="button">КАФЕ И РЕСТОРАНЫ</RightLink>
+              <RightLink
+                role="button"
+                aria-haspopup="true"
+                aria-controls="cafes-menu"
+                ref={cafesMenuAnchorRef}
+                onClick={toggleCafesCityMenu}
+              >
+                КАФЕ И РЕСТОРАНЫ
+              </RightLink>
+              <CafesMenu
+                anchorRef={cafesMenuAnchorRef}
+                isMenuOpen={isCafesCityMenuOpen}
+                setMenuOpen={setCafesCityMenuOpen}
+                handleCitySelection={handleCafesCitySelection}
+              />
             </RightWraper>
           </>
         )}
