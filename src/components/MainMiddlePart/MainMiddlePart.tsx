@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { BcgContainer, BackgroundImageContainer, BackgroundImage, MainTitle, RightWraper, BackgroundImage100, ButtonRead, MyImageComponent, TitleContainerWrapper, PageTitle, RightTitle, RightLink, ButtonContainer } from "./styles";
 import DoctorsMenu from "./DoctorsMenu";
 import ServicesMenu from "./ServicesMenu";
+import ChildrenMenu from "./ChildrenMenu"; // Импортируем компонент для меню с городами
 import type { MainUpperPartProps } from "./types";
 import { useNavigate } from "react-router-dom";
 
@@ -19,9 +20,11 @@ function MainMiddlePart({
   const [isServiceMenuOpen, setServiceMenuOpen] = useState(false);
   const [isDoctorCityMenuOpen, setDoctorCityMenuOpen] = useState(false);
   const [isServiceCityMenuOpen, setServiceCityMenuOpen] = useState(false);
+  const [isChildrenCityMenuOpen, setChildrenCityMenuOpen] = useState(false); // Состояние для открытия меню городов для детей
   const navigate = useNavigate();
   const doctorMenuAnchorRef = useRef<HTMLButtonElement | null>(null); // Элемент-якорь для меню врачей
   const serviceMenuAnchorRef = useRef<HTMLButtonElement | null>(null); // Элемент-якорь для меню услуг
+  const childrenMenuAnchorRef = useRef<HTMLButtonElement | null>(null); // Элемент-якорь для меню городов для детей
 
   const toggleDoctorMenu = () => {
     setDoctorMenuOpen(!isDoctorMenuOpen);
@@ -37,6 +40,10 @@ function MainMiddlePart({
 
   const toggleServiceCityMenu = () => {
     setServiceCityMenuOpen(!isServiceCityMenuOpen);
+  };
+
+  const toggleChildrenCityMenu = () => {
+    setChildrenCityMenuOpen(!isChildrenCityMenuOpen); // Функция для открытия/закрытия меню городов для детей
   };
 
   const handleDoctorSelection = (doctor: string) => {
@@ -61,6 +68,11 @@ function MainMiddlePart({
     console.log(`Перенаправление на услуги/${selectedService}/${city}`);
   };
 
+  const handleChildrenCitySelection = (city: string) => {
+    navigate(`/${city}/children`); // Редирект для детского раздела
+    console.log(`Перенаправление на детский раздел/${city}`);
+  };
+
   return (
     <BcgContainer>
       <BackgroundImageContainer>
@@ -76,7 +88,7 @@ function MainMiddlePart({
                 role="button"
                 aria-haspopup="true"
                 aria-controls="doctor-menu"
-                ref={doctorMenuAnchorRef} // Используем реф для меню врачей
+                ref={doctorMenuAnchorRef}
                 onClick={toggleDoctorMenu}
               >
                 ВРАЧИ
@@ -86,7 +98,7 @@ function MainMiddlePart({
                 isMenuOpen={isDoctorMenuOpen}
                 setMenuOpen={setDoctorMenuOpen}
                 handleSelection={handleDoctorSelection}
-                cityMenuAnchorRef={doctorMenuAnchorRef} // Передаем анкор для меню городов
+                cityMenuAnchorRef={doctorMenuAnchorRef}
                 isCityMenuOpen={isDoctorCityMenuOpen}
                 setCityMenuOpen={setDoctorCityMenuOpen}
                 handleCitySelection={handleDoctorCitySelection}
@@ -95,7 +107,7 @@ function MainMiddlePart({
                 role="button"
                 aria-haspopup="true"
                 aria-controls="service-menu"
-                ref={serviceMenuAnchorRef} // Используем реф для меню услуг
+                ref={serviceMenuAnchorRef}
                 onClick={toggleServiceMenu}
               >
                 УСЛУГИ
@@ -105,12 +117,26 @@ function MainMiddlePart({
                 isMenuOpen={isServiceMenuOpen}
                 setMenuOpen={setServiceMenuOpen}
                 handleSelection={handleServiceSelection}
-                cityMenuAnchorRef={serviceMenuAnchorRef} // Передаем анкор для меню городов
+                cityMenuAnchorRef={serviceMenuAnchorRef}
                 isCityMenuOpen={isServiceCityMenuOpen}
                 setCityMenuOpen={setServiceCityMenuOpen}
                 handleCitySelection={handleServiceCitySelection}
               />
-              <RightLink role="button">ДЕТИ</RightLink>
+              <RightLink
+                role="button"
+                aria-haspopup="true"
+                aria-controls="children-menu" // Указываем id для меню детей
+                ref={childrenMenuAnchorRef} // Используем реф для меню городов для детей
+                onClick={toggleChildrenCityMenu} // Открывать меню городов для детей при клике на "ДЕТИ"
+              >
+                ДЕТИ
+              </RightLink>
+              <ChildrenMenu
+                anchorRef={childrenMenuAnchorRef} // Передаем реф для меню городов для детей
+                isMenuOpen={isChildrenCityMenuOpen} // Состояние для открытия меню городов для детей
+                setMenuOpen={setChildrenCityMenuOpen} // Функция для управления состоянием открытия меню городов для детей
+                handleCitySelection={handleChildrenCitySelection} // Обработчик выбора города для детей
+              />
               <RightLink role="button">МАГАЗИНЫ</RightLink>
               <RightLink role="button">КАФЕ И РЕСТОРАНЫ</RightLink>
             </RightWraper>
