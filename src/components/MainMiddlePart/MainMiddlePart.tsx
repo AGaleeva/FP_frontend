@@ -15,45 +15,50 @@ function MainMiddlePart({
   const TitleContainer = isMainPage ? MainTitle : PageTitle;
   const [selectedDoctor, setSelectedDoctor] = useState<string | null>(null);
   const [selectedService, setSelectedService] = useState<string | null>(null);
-  const [isCategoryMenuOpen, setCategoryMenuOpen] = useState(false);
-  const [isServicesMenuOpen, setServicesMenuOpen] = useState(false);
-  const [isCityMenuOpen, setCityMenuOpen] = useState(false);
+  const [isDoctorMenuOpen, setDoctorMenuOpen] = useState(false);
+  const [isServiceMenuOpen, setServiceMenuOpen] = useState(false);
+  const [isDoctorCityMenuOpen, setDoctorCityMenuOpen] = useState(false);
+  const [isServiceCityMenuOpen, setServiceCityMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const doctorsMenuAnchorRef = useRef<HTMLButtonElement | null>(null); // Реф для меню врачей
-  const servicesMenuAnchorRef = useRef<HTMLButtonElement | null>(null); // Реф для меню услуг
+  const doctorMenuAnchorRef = useRef<HTMLButtonElement | null>(null); // Элемент-якорь для меню врачей
+  const serviceMenuAnchorRef = useRef<HTMLButtonElement | null>(null); // Элемент-якорь для меню услуг
 
-  const toggleCategoryMenu = () => {
-    setCategoryMenuOpen(!isCategoryMenuOpen);
+  const toggleDoctorMenu = () => {
+    setDoctorMenuOpen(!isDoctorMenuOpen);
   };
 
-  const toggleServicesMenu = () => {
-    setServicesMenuOpen(!isServicesMenuOpen);
+  const toggleServiceMenu = () => {
+    setServiceMenuOpen(!isServiceMenuOpen);
   };
 
-  const toggleCityMenu = () => {
-    setCityMenuOpen(!isCityMenuOpen);
+  const toggleDoctorCityMenu = () => {
+    setDoctorCityMenuOpen(!isDoctorCityMenuOpen);
   };
 
-  const handleDoctorSelection = (category: string) => {
-    setSelectedDoctor(category);
-    setCityMenuOpen(true);
-    setCategoryMenuOpen(false);
+  const toggleServiceCityMenu = () => {
+    setServiceCityMenuOpen(!isServiceCityMenuOpen);
+  };
+
+  const handleDoctorSelection = (doctor: string) => {
+    setSelectedDoctor(doctor);
+    setDoctorCityMenuOpen(true);
+    setDoctorMenuOpen(false);
   };
 
   const handleServiceSelection = (service: string) => {
     setSelectedService(service);
-    setCityMenuOpen(true);
-    setServicesMenuOpen(false);
+    setServiceCityMenuOpen(true);
+    setServiceMenuOpen(false);
   };
 
-  const handleCitySelection = (city: string) => {
+  const handleDoctorCitySelection = (city: string) => {
     navigate(`/${city}/doctors/${selectedDoctor}`);
     console.log(`Перенаправление на врачей/${selectedDoctor}/${city}`);
   };
 
-  const handleCitySelectionService = (city: string) => {
+  const handleServiceCitySelection = (city: string) => {
     navigate(`/${city}/services/${selectedService}`);
-    console.log(`Перенаправление на услиги/${selectedService}/${city}`);
+    console.log(`Перенаправление на услуги/${selectedService}/${city}`);
   };
 
   return (
@@ -70,46 +75,44 @@ function MainMiddlePart({
               <RightLink
                 role="button"
                 aria-haspopup="true"
-                aria-controls="category-menu"
-                ref={doctorsMenuAnchorRef} // Используем реф для меню врачей
-                onClick={toggleCategoryMenu}
+                aria-controls="doctor-menu"
+                ref={doctorMenuAnchorRef} // Используем реф для меню врачей
+                onClick={toggleDoctorMenu}
               >
                 ВРАЧИ
               </RightLink>
               <DoctorsMenu
-                anchorRef={doctorsMenuAnchorRef}
-                isCategoryMenuOpen={isCategoryMenuOpen}
-                setCategoryMenuOpen={setCategoryMenuOpen}
-                handleCategorySelection={handleDoctorSelection}
-                cityMenuAnchorRef={doctorsMenuAnchorRef} // Передаем анкор для Menu городов
-                isCityMenuOpen={isCityMenuOpen}
-                setCityMenuOpen={setCityMenuOpen}
-                handleCitySelection={handleCitySelection}
+                anchorRef={doctorMenuAnchorRef}
+                isMenuOpen={isDoctorMenuOpen}
+                setMenuOpen={setDoctorMenuOpen}
+                handleSelection={handleDoctorSelection}
+                cityMenuAnchorRef={doctorMenuAnchorRef} // Передаем анкор для меню городов
+                isCityMenuOpen={isDoctorCityMenuOpen}
+                setCityMenuOpen={setDoctorCityMenuOpen}
+                handleCitySelection={handleDoctorCitySelection}
               />
               <RightLink
                 role="button"
                 aria-haspopup="true"
-                aria-controls="services-menu"
-                ref={servicesMenuAnchorRef} // Используем реф для меню услуг
-                onClick={toggleServicesMenu}
+                aria-controls="service-menu"
+                ref={serviceMenuAnchorRef} // Используем реф для меню услуг
+                onClick={toggleServiceMenu}
               >
                 УСЛУГИ
               </RightLink>
               <ServicesMenu
-                anchorRef={servicesMenuAnchorRef}
-                isServicesMenuOpen={isServicesMenuOpen}
-                setServicesMenuOpen={setServicesMenuOpen}
-                handleServiceSelection={handleServiceSelection}
-                cityMenuAnchorRef={servicesMenuAnchorRef} // Передаем анкор для Menu городов
-                isCityMenuOpen={isCityMenuOpen}
-                setCityMenuOpen={setCityMenuOpen}
-                handleCitySelection={handleCitySelectionService}
+                anchorRef={serviceMenuAnchorRef}
+                isMenuOpen={isServiceMenuOpen}
+                setMenuOpen={setServiceMenuOpen}
+                handleSelection={handleServiceSelection}
+                cityMenuAnchorRef={serviceMenuAnchorRef} // Передаем анкор для меню городов
+                isCityMenuOpen={isServiceCityMenuOpen}
+                setCityMenuOpen={setServiceCityMenuOpen}
+                handleCitySelection={handleServiceCitySelection}
               />
               <RightLink role="button">ДЕТИ</RightLink>
               <RightLink role="button">МАГАЗИНЫ</RightLink>
               <RightLink role="button">КАФЕ И РЕСТОРАНЫ</RightLink>
-              <RightLink role="button">УСЛУГИ</RightLink>
-
             </RightWraper>
           </>
         )}

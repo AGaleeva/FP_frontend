@@ -1,4 +1,4 @@
-// В компоненте DoctorsMenu.tsx
+// DoctorsMenu.tsx
 import React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -6,25 +6,25 @@ import { RightLink } from "../styles";
 
 interface DoctorsMenuProps {
   anchorRef: React.RefObject<HTMLButtonElement | null>;
-  isCategoryMenuOpen: boolean;
-  setCategoryMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  handleCategorySelection: (category: string) => void;
-  // Добавляем новые пропсы для второго Menu
+  isMenuOpen: boolean;
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSelection: (doctor: string) => void;
+  // Добавляем пропсы для меню городов
   cityMenuAnchorRef: React.RefObject<HTMLButtonElement | null>;
   isCityMenuOpen: boolean;
   setCityMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  handleCitySelection: (city: string) => void; // Используем правильный обработчик
+  handleCitySelection: (city: string) => void;
 }
 
 const DoctorsMenu: React.FC<DoctorsMenuProps> = ({
   anchorRef,
-  isCategoryMenuOpen,
-  setCategoryMenuOpen,
-  handleCategorySelection,
+  isMenuOpen,
+  setMenuOpen,
+  handleSelection,
   cityMenuAnchorRef,
   isCityMenuOpen,
   setCityMenuOpen,
-  handleCitySelection, // Используем правильный обработчик
+  handleCitySelection,
 }) => {
   return (
     <>
@@ -57,12 +57,12 @@ const DoctorsMenu: React.FC<DoctorsMenuProps> = ({
         <MenuItem onClick={() => handleCitySelection("hamburg")}>Гамбург</MenuItem>
       </Menu>
 
-      {/* Первое Menu для категорий */}
+      {/* Первое Menu для врачей */}
       <Menu
-        id="category-menu"
+        id="doctor-menu"
         anchorEl={anchorRef.current}
-        open={isCategoryMenuOpen}
-        onClose={() => setCategoryMenuOpen(false)}
+        open={isMenuOpen}
+        onClose={() => setMenuOpen(false)}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "right",
@@ -79,12 +79,12 @@ const DoctorsMenu: React.FC<DoctorsMenuProps> = ({
           },
         }}
       >
-        <MenuItem onClick={() => handleCategorySelection("physicians")}>Терапевты</MenuItem>
-        <MenuItem onClick={() => handleCategorySelection("pediatrists")}>Педиатры</MenuItem>
-        <MenuItem onClick={() => handleCategorySelection("stomatologists")}>Стоматологи</MenuItem>
-        <MenuItem onClick={() => handleCategorySelection("cardiologists")}>Кардиологи</MenuItem>
-        <MenuItem onClick={() => handleCategorySelection("orthopedists")}>Ортопеды</MenuItem>
-        <MenuItem onClick={() => handleCategorySelection("dermatologists")}>Дерматологи</MenuItem>
+        <MenuItem onClick={() => handleSelection("physicians")}>Терапевты</MenuItem>
+        <MenuItem onClick={() => handleSelection("pediatrists")}>Педиатры</MenuItem>
+        <MenuItem onClick={() => handleSelection("stomatologists")}>Стоматологи</MenuItem>
+        <MenuItem onClick={() => handleSelection("cardiologists")}>Кардиологи</MenuItem>
+        <MenuItem onClick={() => handleSelection("orthopedists")}>Ортопеды</MenuItem>
+        <MenuItem onClick={() => handleSelection("dermatologists")}>Дерматологи</MenuItem>
       </Menu>
     </>
   );

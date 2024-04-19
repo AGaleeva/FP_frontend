@@ -6,9 +6,9 @@ import { RightLink } from "../styles";
 
 interface ServicesMenuProps {
   anchorRef: React.RefObject<HTMLButtonElement | null>;
-  isServicesMenuOpen: boolean;
-  setServicesMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  handleServiceSelection: (service: string) => void;
+  isMenuOpen: boolean;
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSelection: (service: string) => void;
   // Добавляем проп 'cityMenuAnchorRef'
   cityMenuAnchorRef: React.RefObject<HTMLButtonElement | null>;
   isCityMenuOpen: boolean;
@@ -18,9 +18,9 @@ interface ServicesMenuProps {
 
 const ServicesMenu: React.FC<ServicesMenuProps> = ({
   anchorRef,
-  isServicesMenuOpen,
-  setServicesMenuOpen,
-  handleServiceSelection,
+  isMenuOpen,
+  setMenuOpen,
+  handleSelection,
   cityMenuAnchorRef, // Включаем 'cityMenuAnchorRef' в компонент
   isCityMenuOpen,
   setCityMenuOpen,
@@ -59,10 +59,10 @@ const ServicesMenu: React.FC<ServicesMenuProps> = ({
 
       {/* Первое Menu для услуг */}
       <Menu
-        id="services-menu"
+        id="service-menu"
         anchorEl={anchorRef.current}
-        open={isServicesMenuOpen}
-        onClose={() => setServicesMenuOpen(false)}
+        open={isMenuOpen}
+        onClose={() => setMenuOpen(false)}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "right",
@@ -79,9 +79,9 @@ const ServicesMenu: React.FC<ServicesMenuProps> = ({
           },
         }}
       >
-        <MenuItem onClick={() => handleServiceSelection("legal_services")}>Юристы</MenuItem>
-        <MenuItem onClick={() => handleServiceSelection("translators")}>Переводчики</MenuItem>
-        <MenuItem onClick={() => handleServiceSelection("hair_beauty")}>Парикмахерские</MenuItem>
+        <MenuItem onClick={() => handleSelection("legal_services")}>Юристы</MenuItem>
+        <MenuItem onClick={() => handleSelection("translators")}>Переводчики</MenuItem>
+        <MenuItem onClick={() => handleSelection("hair_beauty")}>Парикмахерские</MenuItem>
       </Menu>
     </>
   );
