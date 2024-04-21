@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import { colors } from "styles/colors"
 import { Box, Checkbox, TextField, Typography, Button } from "@mui/material"
-import { Subscriptions, Form } from "./styles"
+import { Subscriptions, Form, Column, CheckboxWrapper, CheckboxLabel, ButtonWrapper,  } from "./styles"
 import { useState, useEffect, ChangeEvent, FormEvent } from "react"
 import { instance } from "../../utils/axios"
 import Header from "components/Header"
@@ -109,7 +109,7 @@ function UserAccount() {
   };
 
   return (
-    <>
+<>
       <Header
         logoImgDescr={{ src: GermanMainLogo, alt: "GermanMainLogo" }}
         city="Берлин"
@@ -172,159 +172,152 @@ function UserAccount() {
               value={userData.lastname}
               onChange={handleInputChange}
             />
-            <Typography variant="body1" fontWeight={500} textAlign="center" mb={2}>
-              Выберите интересующие города:
-            </Typography>
-
-            <Box display="flex" alignItems="center">
-              <Checkbox
-                name="berlin"
-                checked={userData.berlin}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="berlin">Берлин</label>
+            <Box display="flex" justifyContent="center">
+              <Column>
+                <Typography variant="body1" fontWeight={500} textAlign="center" mb={2}>
+                  Выберите интересующие города:
+                </Typography>
+                <CheckboxWrapper>
+                  <Checkbox
+                    name="berlin"
+                    checked={userData.berlin}
+                    onChange={handleInputChange}
+                  />
+                  <CheckboxLabel htmlFor="berlin">Берлин</CheckboxLabel>
+                </CheckboxWrapper>
+                <CheckboxWrapper>
+                  <Checkbox
+                    name="muenchen"
+                    checked={userData.muenchen}
+                    onChange={handleInputChange}
+                  />
+                  <CheckboxLabel htmlFor="muenchen">Мюнхен</CheckboxLabel>
+                </CheckboxWrapper>
+                <CheckboxWrapper>
+                  <Checkbox
+                    name="dusseldorf"
+                    checked={userData.dusseldorf}
+                    onChange={handleInputChange}
+                  />
+                  <CheckboxLabel htmlFor="dusseldorf">Дюссельдорф</CheckboxLabel>
+                </CheckboxWrapper>
+                <CheckboxWrapper>
+                  <Checkbox
+                    name="hamburg"
+                    checked={userData.hamburg}
+                    onChange={handleInputChange}
+                  />
+                  <CheckboxLabel htmlFor="hamburg">Гамбург</CheckboxLabel>
+                </CheckboxWrapper>
+                <CheckboxWrapper>
+                  <Checkbox
+                    name="frankfurt"
+                    checked={userData.frankfurt}
+                    onChange={handleInputChange}
+                  />
+                  <CheckboxLabel htmlFor="frankfurt">Франкфурт</CheckboxLabel>
+                </CheckboxWrapper>
+              </Column>
+              <Column>
+                <Typography variant="body1" fontWeight={500} textAlign="center" mb={2}>
+                  Выберите интересующие вас категории:
+                </Typography>
+                <CheckboxWrapper>
+                  <Checkbox
+                    name="children_info"
+                    checked={userData.children_info}
+                    onChange={handleInputChange}
+                  />
+                  <CheckboxLabel htmlFor="children_info">Дети</CheckboxLabel>
+                </CheckboxWrapper>
+                <CheckboxWrapper>
+                  <Checkbox
+                    name="doctors_info"
+                    checked={userData.doctors_info}
+                    onChange={handleInputChange}
+                  />
+                  <CheckboxLabel htmlFor="doctors_info">Врачи</CheckboxLabel>
+                </CheckboxWrapper>
+                <CheckboxWrapper>
+                  <Checkbox
+                    name="hair_beauty_info"
+                    checked={userData.hair_beauty_info}
+                    onChange={handleInputChange}
+                  />
+                  <CheckboxLabel htmlFor="hair_beauty_info">Парикмахерские и красота</CheckboxLabel>
+                </CheckboxWrapper>
+                <CheckboxWrapper>
+                  <Checkbox
+                    name="legal_services_info"
+                    checked={userData.legal_services_info}
+                    onChange={handleInputChange}
+                  />
+                  <CheckboxLabel htmlFor="legal_services_info">Юридические услуги</CheckboxLabel>
+                </CheckboxWrapper>
+                <CheckboxWrapper>
+                  <Checkbox
+                    name="restaurants_info"
+                    checked={userData.restaurants_info}
+                    onChange={handleInputChange}
+                  />
+                  <CheckboxLabel htmlFor="restaurants_info">Рестораны и кафе</CheckboxLabel>
+                </CheckboxWrapper>
+                <CheckboxWrapper>
+                  <Checkbox
+                    name="shops_info"
+                    checked={userData.shops_info}
+                    onChange={handleInputChange}
+                  />
+                  <CheckboxLabel htmlFor="shops_info">Магазины</CheckboxLabel>
+                </CheckboxWrapper>
+                <CheckboxWrapper>
+                  <Checkbox
+                    name="translators_info"
+                    checked={userData.translators_info}
+                    onChange={handleInputChange}
+                  />
+                  <CheckboxLabel htmlFor="translators_info">Переводчики</CheckboxLabel>
+                </CheckboxWrapper>
+              </Column>
             </Box>
-
-            <Box display="flex" alignItems="center">
-              <Checkbox
-                name="muenchen"
-                checked={userData.muenchen}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="muenchen">Мюнхен</label>
-            </Box>
-
-            <Box display="flex" alignItems="center">
-              <Checkbox
-                name="dusseldorf"
-                checked={userData.dusseldorf}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="dusseldorf">Дюссельдорф</label>
-            </Box>
-
-            <Box display="flex" alignItems="center">
-              <Checkbox
-                name="hamburg"
-                checked={userData.hamburg}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="hamburg">Гамбург</label>
-            </Box>
-
-            <Box display="flex" alignItems="center">
-              <Checkbox
-                name="frankfurt"
-                checked={userData.frankfurt}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="frankfurt">Франкфурт</label>
-            </Box>
-
-            <Typography variant="body1" fontWeight={500} textAlign="center" mb={2}>
-              Выберите интересующие вас категории:
-            </Typography>
-
-
-            <Box display="flex" alignItems="center">
-              <Checkbox
-                name="children_info"
-                checked={userData.children_info}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="children_info">Дети</label>
-            </Box>
-
-            <Box display="flex" alignItems="center">
-              <Checkbox
-                name="doctors_info"
-                checked={userData.doctors_info}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="doctors_info">Врачи</label>
-            </Box>
-
-            <Box display="flex" alignItems="center">
-              <Checkbox
-                name="hair_beauty_info"
-                checked={userData.hair_beauty_info}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="hair_beauty_info">Парикмахерские и красота</label>
-            </Box>
-
-            <Box display="flex" alignItems="center">
-              <Checkbox
-                name="legal_services_info"
-                checked={userData.legal_services_info}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="legal_services_info">Юридические услуги</label>
-            </Box>
-
-            <Box display="flex" alignItems="center">
-              <Checkbox
-                name="restaurants_info"
-                checked={userData.restaurants_info}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="restaurants_info">Рестораны и кафе</label>
-            </Box>
-
-            <Box display="flex" alignItems="center">
-              <Checkbox
-                name="shops_info"
-                checked={userData.shops_info}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="shops_info">Магазины</label>
-            </Box>
-
-            <Box display="flex" alignItems="center">
-              <Checkbox
-                name="translators_info"
-                checked={userData.translators_info}
-                onChange={handleInputChange}
-              />
-              <label htmlFor="translators_info">Переводчики</label>
-            </Box>
-
-            <Button
-              type="submit"
-              size="large"
-              variant="contained"
-              sx={{
-                fontFamily: "Montserrat",
-                marginTop: 2,
-                marginBottom: 2,
-                width: "80%",
-                padding: 2,
-              }}
-            >
-              Сохранить
-            </Button>
-
-            <Button
-              onClick={handleLogout}
-              size="large"
-              variant="contained"
-              color="error"
-              sx={{
-                fontFamily: "Montserrat",
-                marginTop: 2,
-                marginBottom: 2,
-                width: "80%",
-                padding: 2,
-              }}
-            >
-              Выйти из аккаунта
-            </Button>
+            <ButtonWrapper>
+              <Button
+                type="submit"
+                size="large"
+                variant="contained"
+                sx={{
+                  fontFamily: "Montserrat",
+                  marginTop: 2,
+                  marginBottom: 2,
+                  width: "80%",
+                  padding: 2,
+                  
+                }}
+              >
+                Сохранить
+              </Button>
+              <Button
+                onClick={handleLogout}
+                size="large"
+                variant="contained"
+                color="error"
+                sx={{
+                  fontFamily: "Montserrat",
+                  marginTop: 2,
+                  marginBottom: 2,
+                  width: "80%",
+                  padding: 2,
+                }}
+              >
+                Выйти из аккаунта
+              </Button>
+            </ButtonWrapper>
           </Box>
         </Form>
       </Subscriptions>
       <Footer />
     </>
-  );
+      );
 }
 
 export default UserAccount;
