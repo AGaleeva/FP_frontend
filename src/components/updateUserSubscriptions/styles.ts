@@ -13,6 +13,12 @@ export const Form = styled.form`
     width: 100%;
     max-width: 80%;
 `
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px; /* Расстояние между колонками */
+`;
+
 // export const InsitingText = styled(NavLink)`
 //     color: blue;
 //     font-weight: 600;

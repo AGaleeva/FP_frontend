@@ -38,22 +38,22 @@ function UserAccount() {
   useEffect(() => {
     async function fetchUserData() {
       try {
-          const response = await instance.get<UserDataProps>("/user_login/user_account");
-      // Проверяем, если значение равно null, устанавливаем пустую строку
-      const { firstname, lastname, ...rest } = response.data;
-      setUserData({
-        firstname: firstname || "",
-        lastname: lastname || "",
-        ...rest,
-      });
-        
+        const response = await instance.get<UserDataProps>("/user_login/user_account");
+        // Проверяем, если значение равно null, устанавливаем пустую строку
+        const { firstname, lastname, ...rest } = response.data;
+        setUserData({
+          firstname: firstname || "",
+          lastname: lastname || "",
+          ...rest,
+        });
+
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     }
     fetchUserData();
   }, []);
-  
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === "checkbox" ? checked : value;
@@ -61,25 +61,25 @@ function UserAccount() {
       ...prevData,
       [name]: newValue,
     }));
-  };  
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-        await instance.put("/user_login", userData);
-        console.log("User data updated successfully:", userData);
-        navigate("/")
+      await instance.put("/user_login", userData);
+      console.log("User data updated successfully:", userData);
+      navigate("/")
     } catch (error) {
       console.error("Error updating user data:", error);
     }
   };
 
-  
+
   const handleLogout = async () => {
     try {
       const response = await instance.get("/auth/logout");
       console.log("Logout successful:", response.data);
-        
+
       // Обновление состояния пользователя
       setUserData((prevUserData) => ({
         ...prevUserData,
@@ -99,7 +99,7 @@ function UserAccount() {
         hamburg: false,
         frankfurt: false,
       }));
-  
+
       dispatch(userActions.clearUserInfo())
       // Перенаправление на главную страницу
       navigate("/");
@@ -107,8 +107,8 @@ function UserAccount() {
       console.error("Error logging out:", error);
     }
   };
-  
-    return (
+
+  return (
     <>
       <Header
         logoImgDescr={{ src: GermanMainLogo, alt: "GermanMainLogo" }}
@@ -173,7 +173,7 @@ function UserAccount() {
               onChange={handleInputChange}
             />
             <Typography variant="body1" fontWeight={500} textAlign="center" mb={2}>
-              Выберите интересующие вас категории:
+              Выберите интересующие города:
             </Typography>
 
             <Box display="flex" alignItems="center">
@@ -220,6 +220,11 @@ function UserAccount() {
               />
               <label htmlFor="frankfurt">Франкфурт</label>
             </Box>
+
+            <Typography variant="body1" fontWeight={500} textAlign="center" mb={2}>
+              Выберите интересующие вас категории:
+            </Typography>
+
 
             <Box display="flex" alignItems="center">
               <Checkbox
